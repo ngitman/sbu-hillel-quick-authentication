@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Body from './components/Body';
+import Layout from './components/Layout.js';
+import { createTheme, ThemeProvider } from '@mui/material';
+import { Routes, Route } from 'react-router-dom';
+import Authentication from './components/Authentication';
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#000000',
+        primary: '#000000'
+      }
+    }
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Layout>
+        <Routes>
+          <Route path="/signin" element={<Authentication />} />
+          <Route path="/signin/:event" element={null} /> {/* For future implementation */}
+          <Route path="/" element={<Body />} />
+        </Routes>
+      </Layout>
+    </ThemeProvider>
   );
 }
 
